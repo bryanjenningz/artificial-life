@@ -81,7 +81,14 @@ let grid =
   .split('\n')
   .map(row => row.split(''))
 
-for (let i = 0; i < 5; i++) {
-  grid = Grid.update(behaviors, grid)
-  console.log(Grid.toString(grid))
-}
+document.querySelector('#play-button').addEventListener('click', () => {
+  playing = !playing
+  document.querySelector('#play-button').textContent = playing ? 'Pause' : 'Play'
+})
+let playing = true
+setInterval(() => {
+  if (playing) {
+    grid = Grid.update(behaviors, grid)
+    document.querySelector('#root').textContent = Grid.toString(grid)
+  }
+}, 500)

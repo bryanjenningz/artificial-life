@@ -197,7 +197,14 @@ const plan =
 
 const world = new World(plan, {'#': Wall, 'o': BouncingCritter})
 
-for (let i = 0; i < 5; i++) {
-  world.turn()
-  console.log(world.toString())
-}
+document.querySelector('#play-button').addEventListener('click', () => {
+  playing = !playing
+  document.querySelector('#play-button').textContent = playing ? 'Pause' : 'Play'
+})
+let playing = true
+setInterval(() => {
+  if (playing) {
+    world.turn()
+    document.querySelector('#root').textContent = world.toString()
+  }
+}, 500)
